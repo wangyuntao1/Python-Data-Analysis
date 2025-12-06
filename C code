@@ -1,1 +1,50 @@
+# include <stdio.h>
+int main() {
+    int year = 2088;
+    int month = 2;
+    int day = 31;
+    int day_in_month = 0;
+    int is_leap_year = ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0)) ? 1 : 0;
 
+    if (year <= 0 || month < 1 || month > 12 || day < 1 || day > 31) {
+        printf("错误:提供的日期不合法。\n");
+        return 1;
+    }
+    else {
+        switch(month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                day_in_month = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                day_in_month = 30;
+                break;
+            case 2:
+                day_in_month = (is_leap_year) ? 29 : 28;
+        }
+        if (day <= day_in_month) {
+            day++;
+            if (day > day_in_month) {
+                day = 1;
+                month++;
+                if (month > 12) {
+                    month = 1;
+                    year++;
+                }
+            }
+            printf("下一天的日期为:%d年%d月%d日。\n",year,month,day);           
+        }
+        else {
+            printf("错误:提供的日期不合法。\n");
+            return 1;
+        }
+    }
+}
